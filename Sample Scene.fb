@@ -1,8 +1,4 @@
-//Sphere pos radius color
-//InfiniteFloor y Color1 Color2
-//Light pos
-//Cube corner1 corner2 color
-//Pyramid pos size height color
+// Sample Scene
 
 Sphere [0,0,10] 5 #FF0000
 InfiniteFloor -5 #FFFFFF #000000 1
