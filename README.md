@@ -8,7 +8,7 @@ To try it out:
 2. Run `main.py`.
 3. Select a `.fb` scene file when prompted.
 
-Don't worry, I included a sample scene (`samplescene.fb`) so you can test it immediately.
+A sample scene is included (`samplescene.fb`) so you can test it immediately.
 
 ---
 
@@ -16,160 +16,131 @@ Don't worry, I included a sample scene (`samplescene.fb`) so you can test it imm
 
 Scenes are stored in `.fb` files.
 
-An `.fb` file is a plain text file that describes the camera, objects, and lights in a scene.
+Each file is a simple text format that defines the camera, objects, and lights.
 
-Comments can be added using:
+Comments:
 
-```txt
+```txt id="cmt1"
 // This is a comment
 ```
 
-## Important Formatting Rules
+---
 
-### No spaces inside coordinates
+# Important Rules
+
+## No spaces inside coordinates
 
 Coordinates must be written without spaces.
 
 ✅ Correct:
 
-```txt
+```txt id="ok1"
 sphere (0,5,20) 5 #FF0000
 ```
 
 ❌ Incorrect:
 
-```txt
+```txt id="bad1"
 sphere (0, 5, 20) 5 #FF0000
 ```
 
-The parser will not read coordinates correctly if spaces are included inside coordinate lists.
+---
 
-### Commands are not case-sensitive
+## Commands are not case-sensitive
 
-All of the following work:
-
-```txt
+```txt id="case1"
 sphere
-Sphere
 SPHERE
-SpHeRe
+Sphere
+```
+
+all work.
+
+---
+
+# Camera (UPDATED)
+
+The camera now supports advanced rendering settings.
+
+### Syntax:
+
+```txt id="cam1"
+camera (x,y,z) epsilon MAX_STEPS MAX_DIST FOV #SKY_COLOR (width,height)
 ```
 
 ---
 
-## Camera
+### Parameters:
 
-Sets the camera position.
+* `(x,y,z)` → camera position
+* `epsilon` → precision of raymarching (smaller = more accurate, slower)
+* `MAX_STEPS` → max raymarch iterations
+* `MAX_DIST` → max ray travel distance
+* `FOV` → field of view (degrees)
+* `#SKY_COLOR` → background color (hex)
+* `(width,height)` → resolution of render
 
-Syntax:
+---
 
-```txt
-camera (x,y,z)
-```
+### Example:
 
-Example:
-
-```txt
-camera (0,5,-20)
+```txt id="cam2"
+camera (0,5,-20) 0.0001 600 1000 90 #87CEEB (1280,720)
 ```
 
 ---
 
-## Sphere
+# Sphere
 
-Creates a sphere.
-
-Syntax:
-
-```txt
+```txt id="s1"
 sphere (x,y,z) radius #RRGGBB
 ```
 
 Example:
 
-```txt
+```txt id="s2"
 sphere (0,5,20) 5 #FF0000
 ```
 
 ---
 
-## Cube
+# Cube
 
-Creates a cube using two opposite corners.
-
-Syntax:
-
-```txt
+```txt id="c1"
 cube (x1,y1,z1) (x2,y2,z2) #RRGGBB
 ```
 
-Example:
-
-```txt
-cube (-5,0,10) (5,10,20) #00FF00
-```
-
 ---
 
-## Pyramid
+# Pyramid
 
-Creates a pyramid.
-
-Syntax:
-
-```txt
+```txt id="p1"
 pyramid (x,y,z) size height #RRGGBB
 ```
 
-Example:
-
-```txt
-pyramid (10,0,20) 8 12 #FFFF00
-```
-
 ---
 
-## Infinite Floor
+# Infinite Floor
 
-Creates an infinite checkerboard floor.
-
-Syntax:
-
-```txt
+```txt id="f1"
 infinitefloor y_height #COLOR1 #COLOR2 tile_size
 ```
 
-Example:
-
-```txt
-infinitefloor 0 #FFFFFF #000000 10
-```
-
 ---
 
-## Light
+# Light
 
-Creates a point light.
-
-Syntax:
-
-```txt
+```txt id="l1"
 light (x,y,z)
 ```
 
-Example:
-
-```txt
-light (0,20,0)
-```
-
 ---
 
-## Example Scene
+# Example Scene (NEW CAMERA FORMAT)
 
-```txt
+```txt id="ex1"
 // Camera
-camera (0,5,-30)
+camera (0,5,-30) 0.0001 600 1000 90 #87CEEB (1280,720)
 
 // Floor
 infinitefloor 0 #FFFFFF #000000 10
@@ -184,37 +155,18 @@ light (0,20,0)
 light (20,30,-10)
 ```
 
-Save it as:
-
-```txt
-myscene.fb
-```
-
 ---
 
-# Color Format
+# Performance Note
 
-Colors use hexadecimal RGB values.
+Lower epsilon + higher MAX_STEPS = better quality but MUCH slower.
 
-Examples:
-
-```txt
-#FF0000 Red
-#00FF00 Green
-#0000FF Blue
-#FFFFFF White
-#000000 Black
-#FFFF00 Yellow
-#FF00FF Magenta
-#00FFFF Cyan
-```
+If your scene is slow, try increasing epsilon or lowering MAX_STEPS.
 
 ---
 
 # Help Me
 
-On my garbage PC, the sample scene renders at about **60–90 seconds per frame**.
+This runs at ~60–90 seconds per frame on my low-end PC using the sample scene.
 
-If anybody is reading this and likes optimization, please take a look at the code and tell me what can be improved.
-
-Any performance tips, pull requests, or optimization ideas are appreciated.
+If someone sees this and knows optimization (math, raymarching, caching, vector tricks), contributions are welcome.
