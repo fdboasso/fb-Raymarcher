@@ -1,13 +1,5 @@
-//Sphere pos radius color
-//InfiniteFloor y Color1 Color2
-//Light pos
-//Cube corner1 corner2 color
-//Pyramid pos size height color
-//Camera pos epsilon MAX_STEPS MAX_DIST fov sky_color Resolution
-
+// SampleScene
 Sphere [0,0,10] 5 #FF0000
-//Cube [-2.5,-5,7.5] [2.5,0,12.5] #0000FF
-//Pyramid [0,0,10] 5 5 #FFFF00
 InfiniteFloor -5 #FFFFFF #000000 1
 Light [-2,10,2]
 Camera [0,0,0] 0.0001 600 1000 90 #00BFFF [720,480]
