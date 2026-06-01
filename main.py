@@ -27,7 +27,7 @@ if not any(objects[:3]):
     pygame.quit()
     quit()
 
-screen_res = [720, 480]
+screen_res = objects[2][6]
 screen = pygame.display.set_mode(screen_res)
 
 font = pygame.font.Font(None, 50)

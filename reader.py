@@ -66,7 +66,13 @@ def Scene_Reader(filename):
             if line.lower().startswith("camera"):
                 arguments = line.split()
                 pos = tuple(ast.literal_eval(arguments[1]))
-                camera = pos
+                epsilon = float(arguments[2])
+                MAX_STEPS = int(arguments[3])
+                MAX_DIST = float(arguments[4])
+                FOV = float(arguments[5])
+                sky_color = hex_to_rgb(arguments[6])
+                resolution = tuple(ast.literal_eval(arguments[7]))
+                camera = [pos, epsilon, MAX_STEPS, MAX_DIST, FOV, sky_color, resolution]
 
     except FileNotFoundError:
         print("Error: The file was not found.")

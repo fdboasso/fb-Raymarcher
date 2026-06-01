@@ -46,22 +46,22 @@ def get_normal(p, SDF):
     return normalize((dx, dy, dz))
 
 def calculate_specular(p, n, rd, light_pos, shininess=32.0, ks=1.0):
-    L = pygame.Vector3([
+    L = normalize([
         light_pos[0] - p[0],
         light_pos[1] - p[1],
         light_pos[2] - p[2]
-    ]).normalize().xyz
+    ])
     
-    V = pygame.Vector3([
+    V = normalize([
         -rd[0],
         -rd[1],
         -rd[2]
-    ]).normalize().xyz
+    ])
 
-    H = pygame.Vector3([
+    H = normalize([
         L[0] + V[0],
         L[1] + V[1],
         L[2] + V[2]
-    ]).normalize().xyz
+    ])
     
     return ks * (max(0.0, dot(n, H)) ** shininess)

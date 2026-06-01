@@ -9,13 +9,12 @@ class RayTracer_camera:
         self.obj = objects[0]
         self.lights = objects[1]
 
-        self.pos = objects[2]
-        self.epsilon = 0.0001
-        self.MAX_STEPS = 600
-        self.MAX_DIST = 1000
-        self.fov = 90
-        self.sky_color = (0, 191, 255)
-        self.MAX_BOUNCES = 2
+        self.pos = objects[2][0]
+        self.epsilon = objects[2][1]
+        self.MAX_STEPS = objects[2][2]
+        self.MAX_DIST = objects[2][3]
+        self.fov = objects[2][4]
+        self.sky_color = (lambda c: tuple(int(max(0, min(1, x)) * 255) for x in c))(objects[2][5])
         
         self.screen = screen
         self.screen_res = self.screen.get_size()
