@@ -8,7 +8,7 @@ To try it out:
 2. Run `main.py`.
 3. Select a `.fb` scene file when prompted.
 
-A sample scene is included (`samplescene.fb`) so you can test it immediately.
+A sample scene is included (`Sample Scene.fb`) so you can test it immediately.
 
 ---
 
