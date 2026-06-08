@@ -61,7 +61,8 @@ def Scene_Reader(filename):
                 arguments = line.split()
 
                 pos = ast.literal_eval(arguments[1])
-                lights.append(Light(pos))
+                color = hex_to_rgb(arguments[2])
+                lights.append(Light(pos, color))
 
             if line.lower().startswith("camera"):
                 arguments = line.split()

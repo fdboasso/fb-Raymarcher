@@ -30,8 +30,9 @@ class RayTracer_camera:
         self.generate_ray_dirs()
 
     def in_shadow(self, p, light):
-        light_dir = vector_math.normalize(vector_math.subtract(light.pos, p))
 
+        light_dir = vector_math.normalize(vector_math.subtract(light.pos, p))
+        
         shadow_origin = vector_math.two_vector_add(p, vector_math.vector_multiply(light_dir, self.epsilon * 10))
         t = 0.0
         max_dist_to_light = vector_math.length(vector_math.subtract(light.pos, p))
@@ -97,6 +98,7 @@ class RayTracer_camera:
                 normal = vector_math.get_normal(p, objct.SDF)
                 final_color = [0.0, 0.0, 0.0]
                 for light in self.lights:
+  
                     light_dir = vector_math.normalize(vector_math.subtract(light.pos, p))
 
                     diffuse = max(vector_math.dot(normal, light_dir), 0.0)
@@ -105,10 +107,10 @@ class RayTracer_camera:
                     if self.in_shadow(p, light):
                         diffuse *= 0.1
                         specular *= 0.0
-
-                    final_color[0] += base_color[0] * diffuse + specular
-                    final_color[1] += base_color[1] * diffuse + specular
-                    final_color[2] += base_color[2] * diffuse + specular
+                        
+                    final_color[0] += base_color[0] * light.color[0] * diffuse + specular * light.color[0]
+                    final_color[1] += base_color[1] * light.color[1] * diffuse + specular * light.color[1]
+                    final_color[2] += base_color[2] * light.color[2] * diffuse + specular * light.color[2]
                 
                 line_framebuf[i] = tuple(int(vector_math.clamp(c, 0, 1) * 255) for c in final_color)
 

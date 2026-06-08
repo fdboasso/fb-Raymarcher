@@ -28,12 +28,11 @@ def two_vector_add(v, vv):
     return (v[0]+vv[0], v[1]+vv[1], v[2]+vv[2])
 
 def normalize(v):
-    x, y, z = v
-    inv_length = 1.0 / math.sqrt(x*x + y*y + z*z)
+    inv_length = 1.0 / length(v)
     return (
-        x * inv_length,
-        y * inv_length,
-        z * inv_length
+        v[0] * inv_length,
+        v[1] * inv_length,
+        v[2] * inv_length
     )
 
 def get_normal(p, SDF):
