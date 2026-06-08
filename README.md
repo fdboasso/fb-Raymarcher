@@ -23,7 +23,9 @@ A sample scene is included (`Sample Scene.fb`) so you can test it immediately.
 
 ## Tested Platforms
 
-The project should run on Windows as Python and the required dependencies are installed.
+The project should run on Windows as long as Python and dependencies are installed.
+
+---
 
 # How to Make Your Own Scenes
 
@@ -33,7 +35,7 @@ Each file is a simple text format that defines the camera, objects, and lights.
 
 Comments:
 
-```txt id="cmt1"
+```txt
 // This is a comment
 ```
 
@@ -45,113 +47,80 @@ Comments:
 
 Coordinates must be written without spaces.
 
-✅ Correct:
-
-```txt id="ok1"
+Correct:
 sphere (0,5,20) 5 #FF0000
-```
 
-❌ Incorrect:
-
-```txt id="bad1"
+Incorrect:
 sphere (0, 5, 20) 5 #FF0000
-```
 
 ---
 
 ## Commands are not case-sensitive
 
-```txt id="case1"
 sphere
 SPHERE
 Sphere
-```
 
 all work.
 
 ---
 
-# Camera (UPDATED)
+# Camera
 
-The camera now supports advanced rendering settings.
+The camera supports advanced rendering settings.
 
-### Syntax:
-
-```txt id="cam1"
+Syntax:
 camera (x,y,z) epsilon MAX_STEPS MAX_DIST FOV #SKY_COLOR (width,height)
-```
 
----
+Parameters:
+- (x,y,z) → camera position
+- epsilon → raymarch precision (smaller = more accurate, slower)
+- MAX_STEPS → max raymarch iterations
+- MAX_DIST → max ray travel distance
+- FOV → field of view (degrees)
+- #SKY_COLOR → background color
+- (width,height) → resolution
 
-### Parameters:
-
-* `(x,y,z)` → camera position
-* `epsilon` → precision of raymarching (smaller = more accurate, slower)
-* `MAX_STEPS` → max raymarch iterations
-* `MAX_DIST` → max ray travel distance
-* `FOV` → field of view (degrees)
-* `#SKY_COLOR` → background color (hex)
-* `(width,height)` → resolution of render
-
----
-
-### Example:
-
-```txt id="cam2"
+Example:
 camera (0,5,-20) 0.0001 600 1000 90 #87CEEB (1280,720)
-```
 
 ---
 
 # Sphere
 
-```txt id="s1"
 sphere (x,y,z) radius #RRGGBB
-```
 
 Example:
-
-```txt id="s2"
 sphere (0,5,20) 5 #FF0000
-```
 
 ---
 
 # Cube
 
-```txt id="c1"
 cube (x1,y1,z1) (x2,y2,z2) #RRGGBB
-```
 
 ---
 
 # Pyramid
 
-```txt id="p1"
 pyramid (x,y,z) size height #RRGGBB
-```
 
 ---
 
 # Infinite Floor
 
-```txt id="f1"
 infinitefloor y_height #COLOR1 #COLOR2 tile_size
-```
 
 ---
 
 # Light
 
-```txt id="l1"
 light (x,y,z)
-```
 
 ---
 
-# Example Scene (NEW CAMERA FORMAT)
+# Example Scene
 
-```txt id="ex1"
 // Camera
 camera (0,5,-30) 0.0001 600 1000 90 #87CEEB (1280,720)
 
@@ -166,7 +135,6 @@ pyramid (10,0,20) 8 12 #FFFF00
 // Lights
 light (0,20,0)
 light (20,30,-10)
-```
 
 ---
 
@@ -174,12 +142,12 @@ light (20,30,-10)
 
 Lower epsilon + higher MAX_STEPS = better quality but MUCH slower.
 
-If your scene is slow, try increasing epsilon or lowering MAX_STEPS.
+If your scene is slow, increase epsilon or reduce MAX_STEPS.
 
 ---
 
-# Help Me
+# Help
 
-This runs at ~60–90 seconds per frame on my low-end PC using the sample scene.
+This runs at ~60–90 seconds per frame on a low-end PC using the sample scene.
 
-If someone sees this and knows optimization (math, raymarching, caching, vector tricks), contributions are welcome.
+If someone knows optimization (math, raymarching, caching, vector tricks), contributions are welcome.
