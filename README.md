@@ -17,14 +17,13 @@ python main.py
 
 4. When prompted, select a `.fb` scene file.
 
-## Tested Platforms
-
-The project should run on Windows as Python and the required dependencies are installed.
-
-
 A sample scene is included (`Sample Scene.fb`) so you can test it immediately.
 
 ---
+
+## Tested Platforms
+
+The project should run on Windows as Python and the required dependencies are installed.
 
 # How to Make Your Own Scenes
 
