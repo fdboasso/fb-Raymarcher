@@ -1,12 +1,26 @@
-# Instructions
+Raymarcher I built when I was bored, and kept improving month by month. According to the folder properties, development started on Monday, March 16, 2026, at 8:22:11 PM.
 
-Raymarcher I built when I was bored, and I kept improving it month by month. after checking my folder properties, this was made in ‎Monday, ‎March ‎16, ‎2026, at ‏‎8:22:11 PM.
+## Running the Project
 
-To try it out:
+1. Make sure Python 3 is installed.
+2. Install the required dependencies:
 
-1. Run `install.bat`.
-2. Run `main.py`.
-3. Select a `.fb` scene file when prompted.
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the program:
+
+```bash
+python main.py
+```
+
+4. When prompted, select a `.fb` scene file.
+
+## Tested Platforms
+
+The project should run on Windows as Python and the required dependencies are installed.
+
 
 A sample scene is included (`Sample Scene.fb`) so you can test it immediately.
 
