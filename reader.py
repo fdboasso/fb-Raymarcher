@@ -10,6 +10,7 @@ def Scene_Reader(filename):
     objects = []
     lights = []
     camera = []
+    screenshot = []
 
     try:
         with open(filename, "r", encoding="utf-8") as f:
@@ -64,6 +65,14 @@ def Scene_Reader(filename):
                 color = hex_to_rgb(arguments[2])
                 lights.append(Light(pos, color))
 
+            if line.lower().startswith("screenshot"):
+                arguments = line.split()
+
+                timestamp = arguments[1].lower() == "true"
+                name = arguments[2]
+
+                screenshot = [timestamp, name]
+
             if line.lower().startswith("camera"):
                 arguments = line.split()
                 pos = tuple(ast.literal_eval(arguments[1]))
@@ -78,7 +87,7 @@ def Scene_Reader(filename):
     except FileNotFoundError:
         print("Error: The file was not found.")
 
-    return [objects, lights, camera]
+    return [objects, lights, camera, screenshot]
 
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip("#")

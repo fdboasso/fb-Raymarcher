@@ -4,6 +4,8 @@ import numpy as np
 
 import vector_math
 
+pygame.init()
+
 class RayTracer_camera:
     def __init__(self, screen, objects):
         self.obj = objects[0]
@@ -17,7 +19,7 @@ class RayTracer_camera:
         self.sky_color = (lambda c: tuple(int(max(0, min(1, x)) * 255) for x in c))(objects[2][5])
         
         self.screen = screen
-        self.screen_res = self.screen.get_size()
+        self.screen_res = objects[2][6]
 
         self.line_surface = pygame.Surface((self.screen_res[0], 1))
         self.framebuffer = np.zeros((self.screen_res[1], self.screen_res[0], 3), dtype=np.uint8)
@@ -107,7 +109,7 @@ class RayTracer_camera:
                     if self.in_shadow(p, light):
                         diffuse *= 0.1
                         specular *= 0.0
-                        
+
                     final_color[0] += base_color[0] * light.color[0] * diffuse + specular * light.color[0]
                     final_color[1] += base_color[1] * light.color[1] * diffuse + specular * light.color[1]
                     final_color[2] += base_color[2] * light.color[2] * diffuse + specular * light.color[2]
