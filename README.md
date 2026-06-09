@@ -19,6 +19,8 @@ python main.py
 
 A sample scene is included (`Sample Scene.fb`) so you can test it immediately.
 
+5. When the program Reaches Near 100%, you need to go to the console and insert a name for the render.
+
 ---
 
 ## Tested Platforms
