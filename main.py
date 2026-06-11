@@ -13,6 +13,8 @@ from tkinter.filedialog import askopenfilename
 
 import os
 
+from concurrent.futures import ThreadPoolExecutor
+
 pygame.init()
 
 objects = None
@@ -32,6 +34,9 @@ fps_stopwatch = 0
 font = pygame.font.Font(None, 50)
 
 filename = None
+
+cores_amount = os.cpu_count()
+executor = ThreadPoolExecutor(max_workers=max(1, os.cpu_count()))
 
 title = font.render(".FB Raymarcher", True, (255, 255, 255))
 title_rect = title.get_rect(center=(screen_res[0]/2, 100))
@@ -85,10 +90,14 @@ def Select_scene():
     update_error("")
 
 def Render():
-    global render_mode, fps_stopwatch, screen
+    global render_mode, fps_stopwatch, screen, line, frame_made
+
     screen = pygame.display.set_mode(objects[2][6])
     fps_stopwatch = time.time()
     render_mode = True
+
+    line = 0
+    frame_made = False
 
 running = True
 while running:
@@ -123,13 +132,21 @@ while running:
                     Render()
 
     elif line < screen_res[1] and render_mode:
-        camera.single_line_render(line)
+        start = line
+        end = min(line + cores_amount, screen_res[1])
+
+        list(
+            executor.map(
+                camera.single_line_render,
+                range(start, end)
+            )
+        )
+
+        line = end
 
         progress = (line / screen_res[1]) * 100
         Percent_text = font.render(f"{progress:.1f}% Baked!", True, (255, 255, 255))
         screen.blit(Percent_text, Percent_text_rect)
-
-        line += 1
 
     elif line >= screen_res[1] and not frame_made and render_mode:
         frame_made = True

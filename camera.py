@@ -1,10 +1,7 @@
-import pygame
 import math
 import numpy as np
 
 import vector_math
-
-pygame.init()
 
 class RayTracer_camera:
     def __init__(self, screen, objects):
@@ -21,7 +18,6 @@ class RayTracer_camera:
         self.screen = screen
         self.screen_res = objects[2][6]
 
-        self.line_surface = pygame.Surface((self.screen_res[0], 1))
         self.framebuffer = np.zeros((self.screen_res[1], self.screen_res[0], 3), dtype=np.uint8)
 
         self.aspect_ratio = self.screen_res[0]/self.screen_res[1]
