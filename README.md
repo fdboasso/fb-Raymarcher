@@ -220,6 +220,6 @@ The renderer displays render progress while rendering and reports timing informa
 
 # Help
 
-This runs at ~60–90 seconds per frame on a low-end PC using the sample scene.
+This runs at ~20–30 seconds per frame on a low-end PC using the sample scene.
 
 If someone knows optimization (math, raymarching, caching, vector tricks), contributions are welcome.
